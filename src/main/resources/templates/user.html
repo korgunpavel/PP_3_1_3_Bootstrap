@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
 <head>
     <title>Spring Security Example</title>
 </head>
 <body>
 <h1>User, welcome spring boot security page!</h1>
+<div>
+    <table>
+        <tr>
+            <th style="font-size: x-large">First name</th>
+            <th style="font-size: x-large">Last name</th>
+            <th style="font-size: x-large">Age</th>
+            <th style="font-size: x-large">Role</th>
 
-
+        </tr>
+        <tr>
+            <th style="font-size: large" th:utext="${user.firstName}"></th>
+            <th style="font-size: large" th:utext="${user.lastName}"></th>
+            <th style="font-size: large" th:utext="${user.age}"></th>
+            <th style="font-size: large" th:text="${user.getRoles()}"></th>
+        </tr>
+    </table>
+</div>
+<br/>
+<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
+<!--    <form th:method="GET" th:action="@{/admin}">-->
+<!--        <input type="submit" value="Admin page">-->
+<!--    </form>-->
+<!--</div>-->
+<br/>
+<form th:method="POST" th:action="@{/logout}">
+    <input type="submit" value="Logout">
+</form>
 </body>
 </html>
