@@ -22,8 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/index").permitAll()
-                        .requestMatchers("/admin/admins", "/admin/show", "/admin/users").hasRole("ADMIN")
+                        .requestMatchers("admin/**").hasRole("ADMIN")
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
@@ -31,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfiguration {
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/index"));
+                        .logoutSuccessUrl("/login"));
 
         return http.build();
     }

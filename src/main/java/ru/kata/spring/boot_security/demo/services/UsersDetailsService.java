@@ -43,10 +43,6 @@ public class UsersDetailsService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public User show(Long id) {
-        return userRepository.findById(id).get();
-    }
-
     @Transactional
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -54,8 +50,8 @@ public class UsersDetailsService implements UserDetailsService {
     }
 
     @Transactional
-    public void update(Long id, User user) {
-        user.setId(id);
+    public void update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
