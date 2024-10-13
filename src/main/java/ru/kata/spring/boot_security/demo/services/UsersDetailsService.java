@@ -50,8 +50,15 @@ public class UsersDetailsService implements UserDetailsService {
     }
 
     @Transactional
-    public void update(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void update(Long id, User user) {
+        user.setId(id);
+        User tabUser = userRepository.findById(id).get();
+
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
+            user.setPassword(tabUser.getPassword());
+        }
         userRepository.save(user);
     }
 

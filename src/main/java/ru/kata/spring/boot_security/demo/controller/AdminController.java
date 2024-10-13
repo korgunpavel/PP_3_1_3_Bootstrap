@@ -47,19 +47,19 @@ public class AdminController {
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("user") @Valid User user, Model model) {
+    public String create(@ModelAttribute("user") User user) {
         usersDetailsService.save(user);
-        return "redirect:/admins/users";
-    }
-
-    @PostMapping("/edit")
-    public String showUser(@ModelAttribute("user") @Valid User user) {
-        usersDetailsService.update(user);
         return "redirect:/admin/users";
     }
 
-    @PostMapping("/delete")
-    public String delete(@RequestParam(name = "id") Long id) {
+    @PostMapping("/edit/{id}")
+    public String showUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
+        usersDetailsService.update(id, user);
+        return "redirect:/admin/users";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable(name = "id") Long id) {
         usersDetailsService.delete(id);
         return "redirect:/admin/users";
     }
