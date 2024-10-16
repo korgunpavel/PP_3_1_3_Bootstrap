@@ -102,93 +102,97 @@
                                     <!-- Модальное окно редактирования пользователя-->
                                     <td class="modal fade" id="editModal" th:id="${'editUser' + user.getId()}"
                                         role="dialog" tabindex="-1">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <form class="form" th:method="POST"
-                                                          th:action="@{/admin/edit/{id}(id=${user.id})}"
-                                                          th:object="${user}">
-                                                        <input type="hidden" name="id" th:value="*{id}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form class="form" th:method="POST"
+                                                      th:action="@{/admin/edit/{id}(id=${user.id})}"
+                                                      th:object="${user}">
+                                                    <input type="hidden" name="id" th:value="*{id}">
 
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Edit user</h5>
-                                                            <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Edit user</h5>
+                                                        <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <div class="form-group">
+                                                            <label class="fw-bold">ID
+                                                                <input disabled
+                                                                       class="form-control form-control-sm"
+                                                                       type="text"
+                                                                       th:value="${user.id}"/>
+                                                            </label>
                                                         </div>
-                                                        <div class="modal-body text-center">
-                                                            <div class="form-group">
-                                                                <label class="fw-bold">ID
-                                                                    <input disabled
-                                                                           class="form-control form-control-sm"
-                                                                           type="text"
-                                                                           th:value="${user.id}"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group mt-3">
-                                                                <label class="fw-bold">First name
-                                                                    <input required
-                                                                           class="form-control form-control-sm"
-                                                                           type="text"
-                                                                           th:name="firstName"
-                                                                           th:value="${user.firstName}"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group mt-3">
-                                                                <label class="fw-bold">Last name
-                                                                    <input required
-                                                                           class="form-control form-control-sm"
-                                                                           type="text"
-                                                                           th:name="lastName"
-                                                                           th:value="${user.lastName}"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group mt-3">
-                                                                <label class="fw-bold">Age
-                                                                    <input required
-                                                                           class="form-control form-control-sm"
-                                                                           type="number" th:name="age"
-                                                                           th:value="${user.age}"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group mt-3">
-                                                                <label class="fw-bold">Username
-                                                                    <input required
-                                                                           class="form-control form-control-sm"
-                                                                           type="text"
-                                                                           th:name="username"
-                                                                           th:value="${user.username}"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group mt-3">
-                                                                <label class="fw-bold">Password
-                                                                    <input
-                                                                            class="form-control form-control-sm"
-                                                                            th:type="text"
-                                                                            th:name="password"/>
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-group mt-3">
-                                                                <label class="fw-bold">Roles:
-                                                                    <select class="form-control form-control-sm"
-                                                                            name="roles" multiple required>
-                                                                        <th:block th:each="role : ${roles}">
-                                                                            <option th:value="${role.id}"
-                                                                                    th:utext="${role}"></option>
-                                                                        </th:block>
-                                                                    </select>
-                                                                </label>
+                                                        <div class="form-group mt-3">
+                                                            <label class="fw-bold">First name
+                                                                <input
+                                                                       class="form-control form-control-sm"
+                                                                       type="text"
+                                                                       th:name="firstName"
+                                                                       th:value="${user.firstName}"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="fw-bold">Last name
+                                                                <input
+                                                                       class="form-control form-control-sm"
+                                                                       type="text"
+                                                                       th:name="lastName"
+                                                                       th:value="${user.lastName}"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="fw-bold">Age
+                                                                <input
+                                                                       class="form-control form-control-sm"
+                                                                       type="number" th:name="age"
+                                                                       th:value="${user.age}"/>
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="fw-bold">Username
+                                                                <input
+                                                                       class="form-control form-control-sm"
+                                                                       type="text"
+                                                                       th:name="username"
+                                                                       th:value="${user.username}"/>
+                                                            </label>
+                                                            <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" role="alert">
+                                                                Имя пользователя занято. Пожалуйста, выберите другое.
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-info" type="submit" value="Edit">
-                                                                Edit
-                                                            </button>
-                                                            <button class="btn btn-secondary" data-bs-dismiss="modal">
-                                                                Close
-                                                            </button>
+
+                                                        <div class="form-group mt-3">
+                                                            <label class="fw-bold">Password
+                                                                <input
+                                                                        class="form-control form-control-sm"
+                                                                        th:type="text"
+                                                                        th:name="password"/>
+                                                            </label>
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                        <div class="form-group mt-3">
+                                                            <label class="fw-bold">Roles:
+                                                                <select class="form-control form-control-sm"
+                                                                        name="roles" multiple required>
+                                                                    <th:block th:each="role : ${roles}">
+                                                                        <option th:value="${role.id}"
+                                                                                th:utext="${role}"></option>
+                                                                    </th:block>
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-info" type="submit" value="Edit">
+                                                            Edit
+                                                        </button>
+                                                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Close
+                                                        </button>
+                                                    </div>
+                                                </form>
                                             </div>
+                                        </div>
                                     </td>
                                     <!-- Модальное окно удаления пользователя-->
                                     <td class="modal fade" id="deleteModal" th:id="${'deleteUser' + user.getId()}"
@@ -290,7 +294,7 @@
                         </div>
                         <div class="card-body text-center">
                             <form class="form mx-auto w-25" th:method="POST" th:action="@{/admin/new}"
-                                  th:object="${newUser}">
+                                  th:object="${user}">
                                 <div class="form-group">
                                     <label class="fw-bold">First name
                                         <input required class="form-control form-control-sm" type="text"
@@ -317,11 +321,12 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="fw-bold">Username
-                                        <input required class="form-control form-control-sm" th:type="text"
+                                        <input required class="form-control form-control-sm" type="text" th:name="username"
                                                th:field="*{username}"/>
                                     </label>
-                                    <div style="color:red" th:if="${#fields.hasErrors('username')}"
-                                         th:errors="*{username}"></div>
+                                    <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger" role="alert">
+                                        Имя пользователя занято. Пожалуйста, выберите другое.
+                                    </div>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="fw-bold">Password

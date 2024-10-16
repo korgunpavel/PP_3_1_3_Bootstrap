@@ -27,8 +27,7 @@ public class UserController {
     public String getUser(ModelMap model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UsersDetails usersDetails = (UsersDetails) authentication.getPrincipal();
-        String username = usersDetails.getUsername();
-        User user = userService.loadUserByUsername(username).get();
+        User user = userService.loadUserByUsername(usersDetails.getUsername()).get();
         model.addAttribute("currentUser", user);
 
         return "user";

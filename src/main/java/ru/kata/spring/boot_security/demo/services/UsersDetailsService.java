@@ -26,15 +26,12 @@ public class UsersDetailsService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("Пользователь не найден");
+            throw new UsernameNotFoundException("User not found");
         }
         return new UsersDetails(user);
     }
@@ -69,6 +66,5 @@ public class UsersDetailsService implements UserDetailsService {
         user.getRoles().clear();
         userRepository.delete(user);
     }
-
 
 }

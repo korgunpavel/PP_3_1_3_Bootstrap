@@ -22,4 +22,12 @@ public class UserService {
     public Optional<User> loadUserByUsername(String username) {
         return Optional.ofNullable(userRepository.findByUsername(username));
     }
+
+    public boolean isUsernameUnique(String username, Long id) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return true;
+        }
+        return user.getId().equals(id);
+    }
 }
